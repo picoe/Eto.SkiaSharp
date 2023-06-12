@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+
+    <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\TestEtoSkiaSharp\TestEtoSkiaSharp.csproj" />
+    <ProjectReference Include="..\..\src\Eto.SkiaSharp.Mac\Eto.SkiaSharp.Mac.csproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="Eto.Platform.Mac64" Version="2.7.5" />
+  </ItemGroup>
+	
+</Project>

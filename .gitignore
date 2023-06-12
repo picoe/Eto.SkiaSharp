@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+packages/
+*.userprefs
+*.suo
+UpgradeLog.htm
+*.user
+.DS_Store
+artifacts/
