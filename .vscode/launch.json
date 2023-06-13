@@ -5,11 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Mac - NET Core",
+            "name": "macOS - NET Core",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build-mac",
-            "program": "${workspaceFolder}/artifacts/bin/Debug/net7.0-macos/TestEtoSkiaSharp.Mac.app/Contents/MacOS/TestEtoSkiaSharp.Mac",
+            "preLaunchTask": "build-macos",
+            "program": "${workspaceFolder}/artifacts/bin/Debug/net7.0-macos/TestEtoSkiaSharp.macOS.app/Contents/MacOS/TestEtoSkiaSharp.macOS",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "justMyCode": false
+        },
+        {
+            "name": "Mac64 - NET Core",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-mac64",
+            "program": "${workspaceFolder}/artifacts/bin/Debug/net7.0/TestEtoSkiaSharp.Mac64.app/Contents/MacOS/TestEtoSkiaSharp.Mac64",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",

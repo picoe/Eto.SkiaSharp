@@ -1,5 +1,9 @@
 ﻿using System;
+#if Mac64
+using MonoMac.AppKit;
+#else
 using AppKit;
+#endif
 using Eto.Mac.Forms;
 using Eto.Mac.Forms.Controls;
 using SkiaSharp;

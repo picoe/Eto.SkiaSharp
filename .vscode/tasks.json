@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build-mac",
+            "label": "build-mac64",
             "command": "dotnet",
             "type": "shell",
             "args": [
@@ -12,7 +12,24 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary",
                 "/bl:artifacts/TestEtoSkiaSharp.Mac.binlog",
-                "test/TestEtoSkiaSharp.Mac/TestEtoSkiaSharp.Mac.csproj"
+                "test/TestEtoSkiaSharp.Mac/TestEtoSkiaSharp.Mac64.csproj"
+            ],
+            "group": "build",
+            "presentation": {
+                "clear": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-macos",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary",
+                "/bl:artifacts/TestEtoSkiaSharp.Mac.binlog",
+                "test/TestEtoSkiaSharp.Mac/TestEtoSkiaSharp.macOS.csproj"
             ],
             "group": "build",
             "presentation": {

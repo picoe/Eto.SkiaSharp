@@ -1,0 +1,112 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+env:
+  BuildVersion: "CI.${{ github.run_id }}"
+  BuildBranch: "${{ github.ref }}"
+  BuildParameters: "-c Release"
+
+jobs:
+  build-windows:
+
+    runs-on: windows-latest
+
+    env:
+      PlatformBuildParameters: /p:Platform=Windows
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0.x'
+
+    - uses: actions/cache@v1
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Build
+      run: dotnet build ${{ env.PlatformBuildParameters }} ${{ env.BuildParameters }}
+
+    - name: Pack Wpf
+      run: dotnet pack ${{ env.PlatformBuildParameters }} ${{ env.BuildParameters }} src/Eto.SkiaSharp.Wpf/Eto.SkiaSharp.Wpf.csproj
+
+    - name: Pack WinForms
+      run: dotnet pack ${{ env.PlatformBuildParameters }} ${{ env.BuildParameters }} src/Eto.SkiaSharp.WinForms/Eto.SkiaSharp.WinForms.csproj
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: nuget
+        path: artifacts/nuget/**/*.nupkg
+
+  build-mac:
+
+    runs-on: macos-latest
+
+    env:
+      PlatformBuildParameters: /p:Platform=Mac
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: setup-xamarin
+      uses: maxim-lobanov/setup-xamarin@v1
+      with:
+        mono-version: latest
+        xamarin-mac-version: latest
+        xcode-version: latest
+
+    - uses: actions/cache@v1
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Build
+      run: dotnet build ${{ env.PlatformBuildParameters }} ${{ env.BuildParameters }}
+
+    - name: Pack macOS
+      run: dotnet pack ${{ env.PlatformBuildParameters }} ${{ env.BuildParameters }} src/Eto.SkiaSharp.Mac/Eto.SkiaSharp.macOS.csproj
+    
+    - name: Pack Gtk
+      run: dotnet pack ${{ env.PlatformBuildParameters }} ${{ env.BuildParameters }} src/Eto.SkiaSharp.Gtk/Eto.SkiaSharp.Gtk.csproj
+
+#    - name: Upload artifacts
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: nuget
+#        path: artifacts/nuget/**/Eto.Veldrid.XamMac2.nupkg
+
+  publish:
+    needs: [ build-windows, build-mac ]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+
+      - name: Download NuGet Packages
+        uses: actions/download-artifact@v1
+        with:
+          name: nuget
+
+      - name: Push packages
+        run: dotnet nuget push './nuget/**/*.nupkg' --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}}

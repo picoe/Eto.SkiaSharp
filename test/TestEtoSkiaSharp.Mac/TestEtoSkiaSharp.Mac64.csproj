@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+
+    <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\TestEtoSkiaSharp\TestEtoSkiaSharp.csproj" />
+    <ProjectReference Include="..\..\src\Eto.SkiaSharp.Mac\Eto.SkiaSharp.Mac64.csproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="Eto.Platform.macOS" Version="2.7.5" />
+    <PackageReference Include="SkiaSharp.NativeAssets.macOS" Version="2.88.3" />
+  </ItemGroup>
+  
+</Project>

@@ -2,11 +2,19 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+#if Mac64
+using MonoMac.CoreGraphics;
+using MonoMac.Foundation;
+// using Metal;
+using MonoMac.MetalKit;
+using MonoMac.ObjCRuntime;
+#else
 using CoreGraphics;
 using Foundation;
 using Metal;
 using MetalKit;
 using ObjCRuntime;
+#endif
 using SkiaSharp.Views.Desktop;
 
 #if __IOS__
@@ -17,7 +25,7 @@ namespace SkiaSharp.Views.Mac
 {
 	[Register(nameof(SKMetalView))]
 	[DesignTimeVisible(true)]
-	public class SKMetalView : MTKView, IMTKViewDelegate, IComponent
+	public class SKMetalView : MTKView, /*IMTKViewDelegate,*/ IComponent
 	{
 		// for IComponent
 #pragma warning disable 67
@@ -43,18 +51,25 @@ namespace SkiaSharp.Views.Mac
 		}
 
 		// created in code
+#if Mac64
+		public SKMetalView(CGRect frame)
+			: base(frame, IntPtr.Zero)
+		{
+			Initialize();
+		}
+#else
 		public SKMetalView(CGRect frame)
 			: base(frame, null)
 		{
 			Initialize();
 		}
 
-		// created in code
 		public SKMetalView(CGRect frame, IMTLDevice device)
 			: base(frame, device)
 		{
 			Initialize();
 		}
+#endif
 
 		// created via designer
 		public SKMetalView(NativeHandle p)
@@ -93,14 +108,15 @@ namespace SkiaSharp.Views.Mac
 			};
 
 			// hook up the drawing
-			Delegate = this;
+			WeakDelegate = this;
 		}
 
 		public SKSize CanvasSize { get; private set; }
 
 		public GRContext GRContext => context;
 
-		void IMTKViewDelegate.DrawableSizeWillChange(MTKView view, CGSize size)
+	    [Export("mtkView:drawableSizeWillChange:")]
+		void DrawableSizeWillChange(IntPtr view, CGSize size)
 		{
 			CanvasSize = size.ToSKSize();
 
@@ -112,7 +128,8 @@ namespace SkiaSharp.Views.Mac
 #endif
 		}
 
-		void IMTKViewDelegate.Draw(MTKView view)
+	    [Export("drawInMTKView:")]
+		void Draw(IntPtr view)
 		{
 			if (designMode)
 				return;

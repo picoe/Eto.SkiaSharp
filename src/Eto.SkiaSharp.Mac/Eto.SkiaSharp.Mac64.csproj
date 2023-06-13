@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+
+    <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
+    <DefineConstants>__MACOS__;Mac64</DefineConstants>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <Using Include="System.IntPtr" Alias="NativeHandle" />
+    <ProjectReference Include="..\Eto.SkiaSharp\Eto.SkiaSharp.csproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="Eto.Platform.Mac64" Version="2.7.5" />
+    <PackageReference Include="SkiaSharp.Views.Desktop.Common" Version="2.88.3" />
+  </ItemGroup>
+  
+</Project>

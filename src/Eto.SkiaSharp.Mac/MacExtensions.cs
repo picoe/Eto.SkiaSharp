@@ -1,7 +1,13 @@
 ﻿using System;
+#if Mac64
+using MonoMac.AppKit;
+using MonoMac.CoreGraphics;
+using MonoMac.ObjCRuntime;
+#else
 using AppKit;
 using CoreGraphics;
 using ObjCRuntime;
+#endif
 
 namespace SkiaSharp.Views.Mac
 {

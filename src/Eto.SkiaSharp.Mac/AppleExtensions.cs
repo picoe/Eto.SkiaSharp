@@ -1,4 +1,12 @@
 ﻿using System;
+
+#if Mac64
+using UIColor = MonoMac.AppKit.NSColor;
+using MonoMac.CoreGraphics;
+using MonoMac.Foundation;
+using MonoMac.CoreImage;
+#else
+
 using CoreGraphics;
 using Foundation;
 
@@ -10,6 +18,7 @@ using CoreImage;
 using UIColor = AppKit.NSColor;
 #else
 using UIKit;
+#endif
 #endif
 
 #if __TVOS__
