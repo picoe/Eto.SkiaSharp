@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{31436444-E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEtoSkiaSharp", "test\TestEtoSkiaSharp\TestEtoSkiaSharp.csproj", "{0ACDF831-E0D8-4F1A-A3A7-7B5BF943E0FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEtoSkiaSharp.Mac", "test\TestEtoSkiaSharp.Mac\TestEtoSkiaSharp.Mac.csproj", "{C7D9211C-DBE6-4E1D-9046-88080A78990D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEtoSkiaSharp.macOS", "test\TestEtoSkiaSharp.Mac\TestEtoSkiaSharp.macOS.csproj", "{C7D9211C-DBE6-4E1D-9046-88080A78990D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEtoSkiaSharp.Wpf", "test\TestEtoSkiaSharp.Wpf\TestEtoSkiaSharp.Wpf.csproj", "{E291AA9D-D707-40F3-ADB5-219CCF8E4EC3}"
 EndProject

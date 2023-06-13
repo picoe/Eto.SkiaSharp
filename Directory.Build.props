@@ -27,12 +27,15 @@
   <PropertyGroup>
     <!-- nuget properties -->
     
+    <DevVersion>0.1.0</DevVersion>
+
     <!-- set version from tag -->
     <Version Condition="$(BuildBranch.StartsWith('refs/tags/'))">$(BuildBranch.Substring(10))</Version>
     <!-- set version for CI build -->
-    <Version Condition="$(Version) == '' AND $(BuildVersion) != ''">$(BuildVersion)</Version>
-    
-    <Version Condition="$(Version) == ''">0.1.0-dev</Version>
+    <Version Condition="$(Version) == '' AND $(BuildVersion) != ''">$(DevVersion)-$(BuildVersion)</Version>
+    <!-- set version for development -->
+    <Version Condition="$(Version) == ''">$(DevVersion)-dev</Version>
+
     <Authors>Eto.SkiaSharp Authors</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Skia;SkiaSharp</PackageTags>
