@@ -7,11 +7,11 @@
   
   <ItemGroup>
     <ProjectReference Include="..\TestEtoSkiaSharp\TestEtoSkiaSharp.csproj" />
-    <ProjectReference Include="..\..\src\Eto.SkiaSharp.Wpf\Eto.SkiaSharp.Wpf.csproj" />
+    <ProjectReference Include="..\..\src\Eto.SkiaSharp.WinForms\Eto.SkiaSharp.WinForms.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Eto.Platform.Wpf" Version="2.7.5" />
+    <PackageReference Include="Eto.Platform.Windows" Version="2.7.5" />
   </ItemGroup>
 
 </Project>

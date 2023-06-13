@@ -2,15 +2,17 @@
 	
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net7.0;net48</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TestEtoSkiaSharp\TestEtoSkiaSharp.csproj" />
+    <ProjectReference Include="..\..\src\Eto.SkiaSharp.Gtk\Eto.SkiaSharp.Gtk.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Eto.Platform.Gtk" Version="2.7.5" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3" />
   </ItemGroup>
 	
 </Project>

@@ -1,6 +1,7 @@
 using System;
 using Eto.Forms;
 using Eto.Drawing;
+using SkiaSharp;
 
 namespace TestEtoSkiaSharp
 {
@@ -8,22 +9,29 @@ namespace TestEtoSkiaSharp
 	{
 		public MainForm()
 		{
-			Title = "My Eto Form";
-			MinimumSize = new Size(200, 200);
+			Title = "My Skia Form";
 
-			Content = new StackLayout
+			var skiaView = new Eto.SkiaSharp.SKView
 			{
-				Padding = 10,
-				Items =
-				{
-					"Hello World!",
-					// add more controls here
-				}
+				Size = new Size(200, 200),
+				IgnorePixelScaling = true
 			};
-
-			// create a few commands that can be used for the menu and toolbar
-			var clickMe = new Command { MenuText = "Click Me!", ToolBarText = "Click Me!" };
-			clickMe.Executed += (sender, e) => MessageBox.Show(this, "I was clicked!");
+			skiaView.PaintSurface += (sender, e) =>
+			{
+				var canvas = e.Surface.Canvas;
+				// canvas.Clear(SKColors.Transparent);
+				var paint = new SKPaint
+				{
+					Color = SKColors.Blue,
+					StrokeWidth = 1,
+					IsAntialias = true,
+					Style = SKPaintStyle.Fill,
+					TextAlign = SKTextAlign.Center,
+					TextSize = 24
+				};
+				canvas.DrawLine(0, 0, 200, 200, paint);
+			};
+			Content = skiaView;
 
 			var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
 			quitCommand.Executed += (sender, e) => Application.Instance.Quit();
@@ -37,7 +45,7 @@ namespace TestEtoSkiaSharp
 				Items =
 				{
 					// File submenu
-					new SubMenuItem { Text = "&File", Items = { clickMe } },
+					// new SubMenuItem { Text = "&File", Items = { clickMe } },
 					// new SubMenuItem { Text = "&Edit", Items = { /* commands/items */ } },
 					// new SubMenuItem { Text = "&View", Items = { /* commands/items */ } },
 				},
@@ -50,8 +58,6 @@ namespace TestEtoSkiaSharp
 				AboutItem = aboutCommand
 			};
 
-			// create toolbar			
-			ToolBar = new ToolBar { Items = { clickMe } };
 		}
 	}
 }

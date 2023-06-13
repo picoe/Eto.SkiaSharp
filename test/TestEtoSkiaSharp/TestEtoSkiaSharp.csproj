@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Eto.Forms" Version="2.7.5" />
-    <ProjectReference Include="..\..\src\Eto.SkiaSharp.csproj" />
+    <ProjectReference Include="..\..\src\Eto.SkiaSharp\Eto.SkiaSharp.csproj" />
   </ItemGroup>
 
 </Project>

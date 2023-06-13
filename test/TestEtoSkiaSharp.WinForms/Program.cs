@@ -1,14 +1,14 @@
 ﻿using System;
 using Eto.Forms;
 
-namespace TestEtoSkiaSharp.Mac
+namespace TestEtoSkiaSharp.WinForms
 {
 	class Program
 	{
 		[STAThread]
 		public static void Main(string[] args)
 		{
-			new Application().Run(new MainForm());
+			new Application(Eto.Platforms.WinForms).Run(new MainForm());
 		}
 	}
 }

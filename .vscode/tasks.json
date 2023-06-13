@@ -11,7 +11,8 @@
                 "build",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary",
-                "TestEtoOpenTK.Mac/TestEtoOpenTK.Mac64.csproj"
+                "/bl:artifacts/TestEtoSkiaSharp.Mac.binlog",
+                "test/TestEtoSkiaSharp.Mac/TestEtoSkiaSharp.Mac.csproj"
             ],
             "group": "build",
             "presentation": {
@@ -27,7 +28,7 @@
                 "build",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary",
-                "TestEtoOpenTK.Gtk/TestEtoOpenTK.Gtk.csproj"
+                "test/TestEtoSkiaSharp.Gtk/TestEtoSkiaSharp.Gtk.csproj"
             ],
             "group": "build",
             "presentation": {
@@ -43,7 +44,25 @@
                 "build",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary",
-                "TestEtoOpenTK.Wpf/TestEtoOpenTK.Wpf.csproj"
+                "/bl:artifacts/TestEtoSkiaSharp.Wpf.binlog",
+                "test/TestEtoSkiaSharp.Wpf/TestEtoSkiaSharp.Wpf.csproj"
+            ],
+            "group": "build",
+            "presentation": {
+                "clear": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-winforms",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary",
+                "/bl:artifacts/TestEtoSkiaSharp.WinForms.binlog",
+                "test/TestEtoSkiaSharp.WinForms/TestEtoSkiaSharp.WinForms.csproj"
             ],
             "group": "build",
             "presentation": {

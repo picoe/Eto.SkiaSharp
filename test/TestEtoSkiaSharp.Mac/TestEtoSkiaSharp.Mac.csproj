@@ -2,18 +2,26 @@
 	
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0-macos</TargetFramework>
 
     <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
+    <SupportedOSPlatformVersion Condition="$(SupportedOSPlatformVersion) == ''">10.15</SupportedOSPlatformVersion>
   </PropertyGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\TestEtoSkiaSharp\TestEtoSkiaSharp.csproj" />
-    <ProjectReference Include="..\..\src\Eto.SkiaSharp.Mac\Eto.SkiaSharp.Mac.csproj" />
+    <ProjectReference Include="..\..\src\Eto.SkiaSharp.Mac\Eto.SkiaSharp.macOS.csproj" />
   </ItemGroup>
 	
   <ItemGroup>
-    <PackageReference Include="Eto.Platform.Mac64" Version="2.7.5" />
+    <PackageReference Include="Eto.Platform.macOS" Version="2.7.5" />
   </ItemGroup>
+  
+  <Target Name="RemoveOpenGLES" AfterTargets="_LoadLinkerOutput">
+    <ItemGroup>
+      <_LinkerFrameworks Remove="OpenGLES" />
+    </ItemGroup>
+    
+  </Target>
 	
 </Project>
